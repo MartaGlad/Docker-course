@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: frontend
+  labels:
+    component: frontend
+spec:
+  containers:
+    - name: todo-frontend-app
+      image: gladyszmrt/todo-frontend:1.0.0
+      ports:
+        - containerPort: 3000
+      env:
+        - name: BROWSER
+          value: "none"
