@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: todos
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      component: backend
+  template:
+    metadata:
+      labels:
+        component: backend
+    spec:
+      containers:
+        - name: todo-backend-app
+          image: gladyszmrt/todo-backend:1.0.2
+          ports:
+            - containerPort: 8000
+          env:
+            - name: MONGO_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secret
+                  key: MONGO_USERNAME
+            - name: MONGO_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secret
+                  key: MONGO_PASSWORD
+          envFrom:
+            - configMapRef:
+                name: mongodb-configmap
