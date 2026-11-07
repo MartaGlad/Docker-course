@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: todo-backend-app
-          image: gladyszmrt/todo-backend:1.0.2
+          image: gladyszmrt/todo-backend:1.0.3
           ports:
             - containerPort: 8000
           env:
